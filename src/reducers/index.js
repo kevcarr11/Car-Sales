@@ -33,6 +33,7 @@ export function reducer(state = initialState, action ) {
       },
       additionalFeatures: state.additionalFeatures.filter(feature => feature.id !== action.payload.id)
     }
+    
     default:
       return state
   };
