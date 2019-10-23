@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { addFeature } from "./actions/additionalFeature";
+import { addFeature, removeFeature } from "./actions/additionalFeature";
 
 import Header from './components/Header';
 import AddedFeatures from './components/AddedFeatures';
@@ -15,7 +15,7 @@ const App = (props) => {
     <div className="boxes">
       <div className="box">
         <Header car={props.car} />
-        <AddedFeatures car={props.car}/>
+        <AddedFeatures car={props.car} removeFeature={props.removeFeature} />
       </div>
       <div className="box">
         <AdditionalFeatures additionalFeatures ={props.additionalFeatures} addFeature={props.addFeature} />
@@ -34,7 +34,8 @@ return {
 }
 
  const mapDispatchToProps = {
-  addFeature
+  addFeature,
+  removeFeature
  };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
