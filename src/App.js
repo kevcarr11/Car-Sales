@@ -1,41 +1,42 @@
 import React from 'react';
+import { Route } from "react-router-dom"
 import { connect } from "react-redux";
 import { addFeature, removeFeature } from "./actions/additionalFeature";
 
-import Header from './components/Header';
-import AddedFeatures from './components/AddedFeatures';
-import AdditionalFeatures from './components/AdditionalFeatures';
-import Total from './components/Total';
+import Starter from "./components/Starter";
+import MustangView from "./components/mustangDisplay/MustangView";
+import TeslaView from './components/teslaDisplay/TeslaView';
 
 const App = (props) => {
   console.log(props)
 
  
   return (
-    <div className="boxes">
-      <div className="box">
-        <Header car={props.car} />
-        <AddedFeatures car={props.car} removeFeature={props.removeFeature} />
-      </div>
-      <div className="box">
-        <AdditionalFeatures additionalFeatures ={props.additionalFeatures} addFeature={props.addFeature} />
-        <Total /> 
-      </div>
-    </div>
+    <>
+    <Route exact path="/" component={Starter} />
+    <Route path="/mustang" render={() => <MustangView removeFeature={props.removeFeature}
+    additionalFeatures ={props.additionalFeatures} addFeature={props.addFeature} {...props} />} />
+    <Route path="/tesla" render={() => <TeslaView removeFeature={props.removeFeature}
+    additionalFeatures ={props.additionalFeatures} addFeature={props.addFeature} {...props} />} />
+    </>
   );
 };
 
+
+
+ 
+
 function mapStateToProps (state) {
-return {
-  additionalFeatures: state.additionalFeatures,
-  additionalPrice: state.additionalPrice,
-  car: state.car
-}
-}
-
- const mapDispatchToProps = {
-  addFeature,
-  removeFeature
- };
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+  return {
+    additionalFeatures: state.additionalFeatures,
+    additionalPrice: state.additionalPrice,
+    car: state.car
+  }
+  }
+  
+   const mapDispatchToProps = {
+    addFeature,
+    removeFeature
+   };
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(App);
