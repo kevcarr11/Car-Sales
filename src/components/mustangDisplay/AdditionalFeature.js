@@ -11,7 +11,7 @@ console.log(props)
     <li>
       {/* Add an onClick that will let you add a feature to your car */}
       <button onClick={() => props.addFeature(props.feature)} className="button">Add</button>
-      {props.feature.name} (+{props.feature.price})
+      {props.feature.name} (+ ${props.feature.price})
     </li>
   );
 };
